@@ -1,15 +1,13 @@
 /* Call the documentReady() function to use this code */
 const documentReady = (links) => {
-  replaceHeader(links)
-  replaceFooter()
+  replaceContent('http://localhost:3001/assets/template.html', links)
 }
 
 /* Generic function to replace content */
-const replaceContent = (target, content, links) => {
-
-  // Get the replacement content with an xhr request
+const replaceContent = (template, links) => {
+  // Get the replacement template with an xhr request
   var xhr= new XMLHttpRequest();
-  xhr.open('GET', content, true);
+  xhr.open('GET', template, true);
   xhr.onreadystatechange= function() {
     // Return if not ready or not good status
     if (this.readyState!==4) return;
@@ -17,19 +15,20 @@ const replaceContent = (target, content, links) => {
 
     // Try to replace target if it exists
     try {
-      let newContent = this.responseText
+      const template = this.responseText
+      let newContent = template.replace('{{CONTENT}}', document.body.innerHTML)
 
       // Check if there are any additional links to include and insert them
+      let additionalLinks = []
       if(links) {
-        let additionalLinks = links.map((link) => {
-          return `<a href=${link.href}>${link.title}</a>`
+         additionalLinks= links.map((link) => {
+          return displayLink(link)
         })
-
-        newContent = newContent.replace('<span id=\'additional-links\'/>', additionalLinks.join(''))
       }
+      newContent = newContent.replace('{{ADDITIONAL_LINKS}}', additionalLinks.join(''))
 
       // Do the actual replacement of target with content
-      document.getElementById(target).outerHTML = newContent;
+      document.body.outerHTML = newContent;
     } catch (e) {
       console.log(`Could not replace "${target}" because it does not exist.`)
     }
@@ -37,12 +36,7 @@ const replaceContent = (target, content, links) => {
   xhr.send();
 }
 
-/* Replace <a id='replace-header' /> with content from template */
-const replaceHeader = (links) => {
-  replaceContent('replace-header', 'http://localhost:3001/assets/header.html', links)
-}
-
-/* Replace <a id='replace-footer' /> with content from template */
-const replaceFooter = () => {
-  replaceContent('replace-footer', 'http://localhost:3001/assets/footer.html')
+/* Format a link object and return html */
+const displayLink = (link)  => {
+  return `<a href=${link.href}>${link.title}</a>`
 }
