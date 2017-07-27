@@ -37,3 +37,12 @@ Hesburgh utility to wrap various webpages with a defined template
   </script>
   <!-- end -->
 ```
+
+# Notes
+
+ * To generate files and upload to AWS:
+
+  `./mangle-and-deploy.sh`
+  
+ * Requires and includes [html-muncher](https://github.com/ccampbell/html-muncher) with the following modifications listed in [Issue 6](https://github.com/ccampbell/html-muncher/issues/6).
+ * HTML Muncher is licensed under [Apache2 license](https://www.apache.org/licenses/LICENSE-2.0).

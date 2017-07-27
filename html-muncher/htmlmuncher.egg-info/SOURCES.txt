@@ -1,0 +1,13 @@
+README
+munch
+setup.py
+htmlmuncher.egg-info/PKG-INFO
+htmlmuncher.egg-info/SOURCES.txt
+htmlmuncher.egg-info/dependency_links.txt
+htmlmuncher.egg-info/top_level.txt
+muncher/__init__.py
+muncher/config.py
+muncher/muncher.py
+muncher/sizetracker.py
+muncher/util.py
+muncher/varfactory.py
