@@ -488,8 +488,13 @@ body.gold-blue #header h4 a {
   padding: 16px 0 16px;
   display: inline-block;
 }
+a.hlhome {
+  color: #fff !important;
+  text-decoration: none !important;
+}
+
 .hlhome em {
-  color: #F8E999;
+  color: #F8E999 !important;
   font-style: normal;
 }
 
@@ -729,6 +734,7 @@ button a {
     margin: 0 auto !important;
     float: none !important;
   }
+
   .hlhome {
     font-size: 22px;
   }
