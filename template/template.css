@@ -63,6 +63,18 @@ a {
   color: #93601D;
 }
 
+a.hlhome {
+  color: #fff !important;
+  text-decoration: none !important;
+}
+
+ .hlhome em {
+
+ color: #F8E999 !important;
+   font-style: normal;
+ }
+
+
 .container-fluid {
   max-width: 1200px;
   margin-left: auto;
@@ -488,13 +500,8 @@ body.gold-blue #header h4 a {
   padding: 16px 0 16px;
   display: inline-block;
 }
-a.hlhome {
-  color: #fff !important;
-  text-decoration: none !important;
-}
-
 .hlhome em {
-  color: #F8E999 !important;
+  color: #F8E999;
   font-style: normal;
 }
 
@@ -734,7 +741,6 @@ button a {
     margin: 0 auto !important;
     float: none !important;
   }
-
   .hlhome {
     font-size: 22px;
   }
@@ -842,7 +848,7 @@ button a {
 }
 
 
-#content {
+#content { 
   /*margin-left: auto;
   margin-right: auto;
   max-width: 1200px;
@@ -859,10 +865,9 @@ button a {
 
 
 
-nav {
+.uNavigation {
   background: #fff url('images/glass.gif') ;
-  }
-
+}
 
 
 nav > .container-fluid {
@@ -906,12 +911,16 @@ nav div > a, .menu div > a {
 }
 
 .hours-m a, .hours-m:hover a {
-  background: url('../images/hours.b.png') no-repeat right 22px top 15px;
+  background: url('images/hours.b.png') no-repeat right 22px top 15px;
   padding-right: 44px;
 }
 
 .hours-m:hover a {
   background-color: rgba(0,0,0,0.3);
+}
+
+.test {
+  display: none;
 }
 
 
