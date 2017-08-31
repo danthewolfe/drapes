@@ -17,7 +17,7 @@ function documentReady (links) {
 }
 
 // Format a link object and return html
-var displayLink = (link)  => {
+function displayLink(link) {
   return `<div class="menu-link"><a href=${link.href}>${link.title}</a></div>`
 }
 
@@ -39,7 +39,7 @@ function addHeader (headerTemplate, links) {
       // Check if there are any additional links to include and insert them
       let additionalLinks = []
       if(links) {
-         additionalLinks = links.map((link) => {
+         additionalLinks = links.map(function(link) {
           return displayLink(link)
         })
       }
