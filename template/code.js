@@ -1,5 +1,5 @@
 // Call the documentReady() function to use this code
-var documentReady = (links) => {
+function documentReady (links) {
   var headerTemplate = 'https://resources.library.nd.edu/frame/header.html'
   var footerTemplate = 'https://resources.library.nd.edu/frame/footer.html'
   var headTemplate = 'https://resources.library.nd.edu/frame/head.html'
@@ -22,7 +22,7 @@ var displayLink = (link)  => {
 }
 
 // add the tempalte haeder to the page
-var addHeader = (headerTemplate, links) => {
+function addHeader (headerTemplate, links) {
   var ADDITIONAL_LINKS = '{{{ADDITIONAL_LINKS}}}'
 
   // Get the replacement template with an xhr request
@@ -53,7 +53,7 @@ var addHeader = (headerTemplate, links) => {
 }
 
 // add the template footer to the page
-var addFooter = (footerTemplate) => {
+function addFooter (footerTemplate) {
   // Get the replacement template with an xhr request
   var xhr= new XMLHttpRequest()
   xhr.open('GET', footerTemplate, true);
@@ -72,7 +72,7 @@ var addFooter = (footerTemplate) => {
 }
 
 // add more css files to the <head> tag
-var updateHead = (headTemplate) => {
+function updateHead (headTemplate) {
   // Get the replacement template with an xhr request
   var xhr= new XMLHttpRequest()
   xhr.open('GET', headTemplate, true);
