@@ -1,10 +1,10 @@
 // Call the documentReady() function to use this code
-const documentReady = (links) => {
-  const headerTemplate = 'https://resources.library.nd.edu/frame/header.html'
-  const footerTemplate = 'https://resources.library.nd.edu/frame/footer.html'
-  const headTemplate = 'https://resources.library.nd.edu/frame/head.html'
+var documentReady = (links) => {
+  var headerTemplate = 'https://resources.library.nd.edu/frame/header.html'
+  var footerTemplate = 'https://resources.library.nd.edu/frame/footer.html'
+  var headTemplate = 'https://resources.library.nd.edu/frame/head.html'
 
-  const wrappedClass = 'hesburgh-wrapped'
+  var wrappedClass = 'hesburgh-wrapped'
   // Check to see if the body has not been wrapped yet. If it has, do nothing.
   if(!document.body.classList.contains(wrappedClass)) {
     addHeader(headerTemplate, links)
@@ -17,13 +17,13 @@ const documentReady = (links) => {
 }
 
 // Format a link object and return html
-const displayLink = (link)  => {
+var displayLink = (link)  => {
   return `<div class="menu-link"><a href=${link.href}>${link.title}</a></div>`
 }
 
 // add the tempalte haeder to the page
-const addHeader = (headerTemplate, links) => {
-  const ADDITIONAL_LINKS = '{{{ADDITIONAL_LINKS}}}'
+var addHeader = (headerTemplate, links) => {
+  var ADDITIONAL_LINKS = '{{{ADDITIONAL_LINKS}}}'
 
   // Get the replacement template with an xhr request
   var xhr= new XMLHttpRequest()
@@ -53,7 +53,7 @@ const addHeader = (headerTemplate, links) => {
 }
 
 // add the template footer to the page
-const addFooter = (footerTemplate) => {
+var addFooter = (footerTemplate) => {
   // Get the replacement template with an xhr request
   var xhr= new XMLHttpRequest()
   xhr.open('GET', footerTemplate, true);
@@ -72,7 +72,7 @@ const addFooter = (footerTemplate) => {
 }
 
 // add more css files to the <head> tag
-const updateHead = (headTemplate) => {
+var updateHead = (headTemplate) => {
   // Get the replacement template with an xhr request
   var xhr= new XMLHttpRequest()
   xhr.open('GET', headTemplate, true);
@@ -89,4 +89,3 @@ const updateHead = (headTemplate) => {
   }
   xhr.send()
 }
-
