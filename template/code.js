@@ -18,7 +18,7 @@ function documentReady (links) {
 
 // Format a link object and return html
 function displayLink(link) {
-  return `<div class="menu-link"><a href=${link.href}>${link.title}</a></div>`
+  return '<div class="menu-link"><a href=' + link.href + '>' + link.title + '</a></div>'
 }
 
 // add the tempalte haeder to the page
