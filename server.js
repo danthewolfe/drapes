@@ -40,6 +40,6 @@ http.createServer((request, response) => {
           response.end(content, 'utf-8')
         }
     })
-
+    response.setHeader('Access-Control-Allow-Origin', '*');
 }).listen(port);
 console.log(`Server running at http://${hostname}:${port}/`)

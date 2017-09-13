@@ -1,13 +1,13 @@
 // Call the documentReady() function to use this code
-function documentReady (links) {
   var headerTemplate = 'https://resources.library.nd.edu/frame/header.html'
   var footerTemplate = 'https://resources.library.nd.edu/frame/footer.html'
   var headTemplate = 'https://resources.library.nd.edu/frame/head.html'
+function documentReady (links, titles) {
 
   var wrappedClass = 'hesburgh-wrapped'
   // Check to see if the body has not been wrapped yet. If it has, do nothing.
   if(!document.body.classList.contains(wrappedClass)) {
-    addHeader(headerTemplate, links)
+    addHeader(headerTemplate, links, titles)
     addFooter(footerTemplate)
     updateHead(headTemplate)
 
@@ -21,9 +21,14 @@ function displayLink(link) {
   return '<div class="menu-link"><a href=' + link.href + '>' + link.title + '</a></div>'
 }
 
+function displayTitle(title) {
+  return '<div class="subtitle"><a href=' + title.href + ' class="subtitle">' + title.title + '</a></div>'
+}
+
 // add the tempalte haeder to the page
-function addHeader (headerTemplate, links) {
-  var ADDITIONAL_LINKS = '{{{ADDITIONAL_LINKS}}}'
+function addHeader (headerTemplate, links, titles) {
+  var ADDITIONAL_LINKS_VARIABLE = '{{{ADDITIONAL_LINKS}}}'
+  var ADDITIONAL_TITLES_VARIABLE = '{{{ADDITIONAL_TITLES}}}'
 
   // Get the replacement template with an xhr request
   var xhr= new XMLHttpRequest()
@@ -43,7 +48,17 @@ function addHeader (headerTemplate, links) {
           return displayLink(link)
         })
       }
-      newContent = newContent.replace('{{{ADDITIONAL_LINKS}}}', additionalLinks.join(''))
+      newContent = newContent.replace(ADDITIONAL_LINKS_VARIABLE, additionalLinks.join(''))
+
+      // Check if there are any additional titles to include and insert them
+      let additionalTitles = []
+      if(titles) {
+         additionalTitles = titles.map(function(title) {
+          return displayTitle(title)
+        })
+      }
+      newContent = newContent.replace(ADDITIONAL_TITLES_VARIABLE, additionalTitles.join(''))
+
       document.body.insertAdjacentHTML('afterbegin', newContent)
     } catch (e) {
       console.log(e)

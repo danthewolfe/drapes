@@ -63,6 +63,11 @@ a {
   color: #93601D;
 }
 
+a.subtitle {
+  color: #fff !important;
+  text-decoration: none !important;
+}
+
 a.hlhome {
   color: #fff !important;
   text-decoration: none !important;
@@ -482,13 +487,23 @@ body.gold-blue #header h4 a {
 #banner {
   clear: both;
   background: #082142 url('images/fade.png') top repeat-x;
-  height: 70px;
 }
 #banner .container-fluid {
   background-position: top right;
   background-repeat: no-repeat;
-  height: 100%;
 }
+#banner .subtitle {
+  display: inline-block;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-right: 20px;
+  padding-left: 20px;
+  font-size: 28px;
+  font-family: GPCMed, sans-serif;
+  text-transform: uppercase;
+}
+
 
 .hlhome {
   font-size: 38px;
