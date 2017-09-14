@@ -22,7 +22,7 @@ function displayLink(link) {
 }
 
 function displayTitle(title) {
-  return '<div class="subtitle"><a href=' + title.href + ' class="subtitle">' + title.title + '</a></div>'
+  return '<div><a href=' + title.href + '>' + title.title + '</a></div>'
 }
 
 // add the tempalte haeder to the page
