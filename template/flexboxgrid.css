@@ -1,4 +1,4 @@
-background-position: right 10px top;/* Uncomment and set these variables to customize the grid. */
+/* Uncomment and set these variables to customize the grid. */
 
 .container-fluid {
   margin-right: auto;
@@ -21,8 +21,8 @@ background-position: right 10px top;/* Uncomment and set these variables to cust
   flex-direction: row;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  margin-right: -1rem;
-  margin-left: -1rem;
+  margin-right: 0rem;
+  margin-left: 0rem;
 }
 
 .row.reverse {
