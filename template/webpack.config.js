@@ -4,7 +4,7 @@ var webpack = require('webpack')
 const genConfig = () => {
   let defaultConfig = {
     baseUrl: 'https://resources.library.nd.edu/frame',
-    contentfulAPI: 'https://bj5rh8poa7.execute-api.us-east-1.amazonaws.com/dev',
+    contentfulAPI: 'https://77qwzi0dp1.execute-api.us-east-1.amazonaws.com/prep',
     version: 'dev',
   }
 
