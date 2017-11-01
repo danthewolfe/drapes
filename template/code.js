@@ -1,106 +1,66 @@
 // Call the documentReady() function to use this code
-  var headerTemplate = 'https://resources.library.nd.edu/frame/header.html'
-  var footerTemplate = 'https://resources.library.nd.edu/frame/footer.html'
-  var headTemplate = 'https://resources.library.nd.edu/frame/head.html'
+
+import renderEl from './reactEntry'
+import config from './configuration'
+
 function documentReady (links, titles) {
+  const site = config.baseUrl
 
   var wrappedClass = 'hesburgh-wrapped'
   // Check to see if the body has not been wrapped yet. If it has, do nothing.
   if(!document.body.classList.contains(wrappedClass)) {
-    addHeader(headerTemplate, links, titles)
-    addFooter(footerTemplate)
-    updateHead(headTemplate)
+    addHeader(site)
+    addFooter(site)
+    updateHead(site)
 
     // Add a class to denote we wrapped the content
     document.body.classList.add(wrappedClass)
+
+    activateReact(links, titles, site)
   }
-}
-
-// Format a link object and return html
-function displayLink(link) {
-  return '<div class="menu-link"><a href=' + link.href + '>' + link.title + '</a></div>'
-}
-
-function displayTitle(title) {
-  return '<div><a href=' + title.href + '>' + title.title + '</a></div>'
 }
 
 // add the tempalte haeder to the page
-function addHeader (headerTemplate, links, titles) {
-  var ADDITIONAL_LINKS_VARIABLE = '{{{ADDITIONAL_LINKS}}}'
-  var ADDITIONAL_TITLES_VARIABLE = '{{{ADDITIONAL_TITLES}}}'
+function addHeader (site) {
+  const headerEl = '<div class="react-data" data-type="header" />'
 
   // Get the replacement template with an xhr request
-  var xhr= new XMLHttpRequest()
-  xhr.open('GET', headerTemplate, true);
-  xhr.onreadystatechange= function() {
-    // Return if not ready or not good status
-    if (this.readyState !==4 ) return
-    if (this.status !==200 ) return
-
-    try {
-      let newContent = this.responseText
-
-      // Check if there are any additional links to include and insert them
-      let additionalLinks = []
-      if(links) {
-         additionalLinks = links.map(function(link) {
-          return displayLink(link)
-        })
-      }
-      newContent = newContent.replace(ADDITIONAL_LINKS_VARIABLE, additionalLinks.join(''))
-
-      // Check if there are any additional titles to include and insert them
-      let additionalTitles = []
-      if(titles) {
-         additionalTitles = titles.map(function(title) {
-          return displayTitle(title)
-        })
-      }
-      newContent = newContent.replace(ADDITIONAL_TITLES_VARIABLE, additionalTitles.join(''))
-
-      document.body.insertAdjacentHTML('afterbegin', newContent)
-    } catch (e) {
-      console.log(e)
-    }
+  try {
+    document.body.insertAdjacentHTML('afterbegin', headerEl)
+  } catch (e) {
+    console.log(e)
   }
-  xhr.send()
 }
 
 // add the template footer to the page
-function addFooter (footerTemplate) {
-  // Get the replacement template with an xhr request
-  var xhr= new XMLHttpRequest()
-  xhr.open('GET', footerTemplate, true);
-  xhr.onreadystatechange= function() {
-    // Return if not ready or not good status
-    if (this.readyState !==4 ) return
-    if (this.status !==200 ) return
+function addFooter (site) {
+  const headerEl = '<div class="react-data" data-type="footer" />'
 
-    try {
-      document.body.insertAdjacentHTML('beforeend', this.responseText)
-    } catch (e) {
-      console.log(e)
-    }
+  try {
+    document.body.insertAdjacentHTML('beforeend', headerEl)
+  } catch (e) {
+    console.log(e)
   }
-  xhr.send()
 }
 
 // add more css files to the <head> tag
-function updateHead (headTemplate) {
-  // Get the replacement template with an xhr request
-  var xhr= new XMLHttpRequest()
-  xhr.open('GET', headTemplate, true);
-  xhr.onreadystatechange= function() {
-    // Return if not ready or not good status
-    if (this.readyState !==4 ) return
-    if (this.status !==200 ) return
+function updateHead (site) {
+  let headEl =
+    `
+    <meta charset="utf-8" /> \
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" /> \
+    <meta id='nd-version' content=${config.version} /> \
+    `
 
-    try {
-      document.head.insertAdjacentHTML('beforeend', this.responseText)
-    } catch (e) {
-      console.log(e)
-    }
+  try {
+    document.head.insertAdjacentHTML('beforeend', headEl)
+  } catch (e) {
+    console.log(e)
   }
-  xhr.send()
 }
+
+function activateReact (links, titles, site) {
+  document.querySelectorAll('.react-data').forEach((el) => renderEl(el, links, titles, site))
+}
+
+window.documentReady = documentReady

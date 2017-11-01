@@ -1,2 +1,3 @@
-template_opt/*
-examples_opt/*
+mangler/toBuild
+node_modules
+classMapping.json

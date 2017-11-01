@@ -1,0 +1,17 @@
+#banner .subtitle {
+  display: inline-block;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-right: 50px;
+  padding-left: 20px;
+  font-size: 28px;
+  font-family: GPCMed, sans-serif;
+  text-transform: uppercase;
+}
+
+.subtitle > div a {
+  color: #fff !important;
+  text-decoration: none !important;
+}
+

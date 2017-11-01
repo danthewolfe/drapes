@@ -1,0 +1,8 @@
+#!/bin/bash
+
+export BASE_URL="/mangler/toBuild/dist"
+
+./mangle.sh
+
+echo "!!! Note: To see changes you'll need to re-run this script !!!"
+node server.js
