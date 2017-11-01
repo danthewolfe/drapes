@@ -8,7 +8,6 @@ export const MOBILE_MENU = 'MOBILE_MENU'
 export class Navigation extends Component {
   constructor (props) {
     super(props)
-    console.log(props)
 
     this.handleData = this.handleData.bind(this)
     this.handleError = this.handleError.bind(this)

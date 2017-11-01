@@ -5,6 +5,7 @@ const findElements = /<(\w+?)[ />\n]/g
 const findClasses = /className=["'](.+?)["']/g
 const findIds = /id=["'](.+?)['"]/g
 
+// promisify reading local file
 const readFile = (fileName) => {
   return new Promise((resolve, reject) => {
     fs.readFile(fileName, 'utf8', (err, data) => {
@@ -13,12 +14,13 @@ const readFile = (fileName) => {
   })
 }
 
+// class mapping contains mapping of classes ('col-sm-4') to new names ('bb')
 let classMapping = {}
+// list of used classes, just the keys from classMapping
 let usedClasses = []
 
 // converts number from base 10 to base valid.length (26)
 // using the valid characters instead of integers as the string
-
 let baseGenInt = 0
 const genName = () => {
   // valid css names must satisfy this /-?[_a-zA-Z]+[_a-zA-Z0-9-]*/ regex
@@ -38,11 +40,18 @@ const genName = () => {
   return name
 }
 
+// Get the classes from a line of text, classes here being:
+// html element <a> -> a
+// className <div className='foo'> -> foo
+// id <div id='bar'> -> bar
 const getClasses = (re, line, nameFunc, type) => {
   let newLine = line
   let match = re.exec(line)
+
+  // if we have more than 1 matching element, continue
   while (match) {
     let element = match[1]
+    // split on spaces so we get all classNames (eg 'col-sm-2 right')
     element = element.split(' ')
     let replacement = ''
 
@@ -55,12 +64,16 @@ const getClasses = (re, line, nameFunc, type) => {
           type: type,
         }
       }
+
+      // generate replacement text using the mapping, including any spaces required
       if (replacement.length > 0) {
         replacement += ' '
       }
       replacement += classMapping[splitElement].name
     }
+
     // replace the classes in the line with new names
+    // don't replace elements, they'll always be the same (<a> should always be <a>)
     if (type !== 'element') {
       let start = match.index
       let end = match[0].length + start
@@ -79,11 +92,14 @@ const parseReact = (fileData) => {
   for (let i = 0; i < lines.length; ++i) {
     let line = lines[i]
 
+    // find and replace classNames and ids and make note of elements for
+    // use in css rewrite
     getClasses(findElements, line, (x) => x, 'element')
     line = getClasses(findClasses, line, genName, 'className')
     line = getClasses(findIds, line, genName, 'id')
     lines[i] = line
   }
+  // return in parts so we can rewrite the same file with new data
   return { data: lines, fileName: fileData.fileName }
 }
 
@@ -98,6 +114,7 @@ const writeReact = (fileData) => {
   })
 }
 
+// this is the base of a css tree for use with this https://github.com/reworkcss/css
 let tree = {
   type: "stylesheet",
   stylesheet: {
@@ -105,6 +122,8 @@ let tree = {
   }
 }
 
+// re-write the read css tree using only rules that will affect our code
+// also re-write classes and ids according to our mapping created from JS
 const recurseCss = (data, node) => {
   let type = data.type
   if (!type) {
@@ -150,6 +169,7 @@ const recurseCss = (data, node) => {
           }
         }
 
+        // if this entire selector was valid, add it with the new classnames
         if (added) {
           let replacedSelector = selector
           for (let i = 0; i < usedClasses.length; ++i) {
@@ -169,6 +189,7 @@ const recurseCss = (data, node) => {
       }
       break
     case "media":
+      // always add media selector, recurse into its rules
       let media = {
         type: type,
         media: data.media,
@@ -180,9 +201,11 @@ const recurseCss = (data, node) => {
       node.push(media)
       break
     case "font-face":
+      // always add font faces
       node.push(data)
       break
     default:
+      // there are other types but we don't use/care about them at this time
       // console.log(type)
   }
 }
@@ -196,7 +219,7 @@ const parseCss = (fileData) => {
 
 let reactFiles = []
 let cssFiles = []
-
+// walk the dir to find all js and css files to parse+rewrite
 const readDir = (dirname) => {
   console.log(dirname)
   let files = fs.readdirSync(dirname)
@@ -220,6 +243,7 @@ const readDir = (dirname) => {
 
 readDir("toBuild")
 
+// generate react file promises to read, parse and re-write the files
 let reactPromises = []
 for (let i = 0; i < reactFiles.length; ++i) {
   let fileName = reactFiles[i]
@@ -230,6 +254,7 @@ for (let i = 0; i < reactFiles.length; ++i) {
   )
 }
 
+// generate css promises to read the files
 let cssPromises = []
 for (let i = 0; i < cssFiles.length; ++i) {
   cssPromises.push(
@@ -237,6 +262,12 @@ for (let i = 0; i < cssFiles.length; ++i) {
   )
 }
 
+// start doing work
+//   read + parse + rewrite js files
+//   generate used class list
+//   read + parse css
+//   write combined style.css file
+//   write a helper file "classMapping.json" with the full css mapping in it
 Promise.all(reactPromises)
 .then(() => {
   for (let key in classMapping) {
