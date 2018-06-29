@@ -641,7 +641,7 @@ hr {
 
 /* Footer */
 #footer-links {
-  background: #999;
+  background: #595959;
   color: #fff;
   padding: 15px 0;
   clear: both;
@@ -697,7 +697,7 @@ hr {
   text-align: right;
 
 }
-#footer-info p {
+#footer-info p, #footer-info a {
   color: #fff;
   font-size: 14px;
 }
