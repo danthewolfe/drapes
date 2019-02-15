@@ -229,7 +229,7 @@ nav > .container-fluid {
 nav div, .menu div {
   display: inline;
 }
-nav div > a, .menu div > a {
+nav div > a, .menu div > a, .menu-list li a {
   text-decoration: none;
   text-transform: uppercase;
   color: #555555;
@@ -661,7 +661,8 @@ hr {
   margin-right: 2em;
 }
 #footer-links li a {
-  font-size: 14px;
+  font-size: 14px !important;
+  font-weight: normal;
 }
 
 #footer-links .box.right {
@@ -893,7 +894,7 @@ nav > .container-fluid {
 nav div, .menu div {
   display: inline;
 }
-nav div > a, .menu div > a {
+nav div > a, .menu div > a, .menu-list li a {
   text-decoration: none;
   text-transform: uppercase;
   color: #555555;
