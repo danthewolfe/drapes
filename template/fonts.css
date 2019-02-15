@@ -102,7 +102,7 @@
 
 @font-face {
   font-family: GPHeavy;
-  src: url('https://library.nd.edu/static/fonts/gp-heavy.woff');
-  src:url("https://library.nd.edu/static/fonts/gp-heavy.woff") format("woff2"),url("https://library.nd.edu/static/fonts/gp-heavy.woff") format("woff"),url("https://library.nd.edu/static/fonts/gp-heavy.ttf") format("truetype")
+  src: url('https://resources.library.nd.edu/fonts/gp-heavy.woff');
+  src:url("https://resources.library.nd.edu/fonts/gp-heavy.woff") format("woff2"),url("https://resources.library.nd.edu/fonts/gp-heavy.woff") format("woff"),url("https://resources.library.nd.edu/fonts/gp-heavy.ttf") format("truetype")
 }
 
