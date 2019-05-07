@@ -232,8 +232,8 @@ nav div, .menu div {
 nav div > a, .menu div > a, .menu-list li a {
   text-decoration: none;
   text-transform: uppercase;
-  color: #555555;
-  font-size: 13px;
+  color: #555555 !important;
+  font-size: 13px !important;
   font-family: GPHeavy, sans-serif;
   letter-spacing: 1.5px;
   padding: 15px 19px 15px;
