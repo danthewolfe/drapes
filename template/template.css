@@ -665,6 +665,11 @@ hr {
   font-weight: normal;
 }
 
+#footer-links a img {
+    width: 20px;
+    vertical-align: sub;
+}
+
 #footer-links .box.right {
   text-align: right;
 
@@ -672,6 +677,7 @@ hr {
 
 #footer-info a {
   color: #fff;
+  text-decoration: underline;
 }
 
 #footer-links a {
@@ -704,7 +710,8 @@ hr {
 }
 
 .flogo {
-  width: 230px;
+  width: auto;
+  height: 45px;
 }
 
 .chat-alternative-contact {
