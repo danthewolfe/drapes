@@ -53,7 +53,6 @@ Hesburgh utility to wrap various webpages with a defined template
 
 # Dependent sites
 This is a list of known sites that currently use drapes for producing it's header/footer:
-- http://onesearch.library.nd.edu/
 - https://factotum.library.nd.edu/
 - https://nd.illiad.oclc.org/illiad/IND/illiad.dll
 - https://medieval-microfilms-and-facsimiles.library.nd.edu/
