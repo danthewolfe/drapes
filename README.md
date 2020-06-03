@@ -40,6 +40,10 @@ Hesburgh utility to wrap various webpages with a defined template
 
 # Notes
 
+ * To test locally, run:
+
+  `node server.js`
+
  * To generate files and upload to AWS:
 
   `./mangle-and-deploy.sh`

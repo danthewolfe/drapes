@@ -26,7 +26,7 @@ http.createServer((request, response) => {
         '.ttf': 'application/font-ttf',
         '.eot': 'application/vnd.ms-fontobject',
         '.otf': 'application/font-otf',
-        '.svg': 'application/image/svg+xml'
+        '.svg': 'image/svg+xml'
     }
 
     contentType = mimeTypes[extname] || 'application/octet-stream'
