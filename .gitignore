@@ -1,4 +1,4 @@
-template_opt/*
-examples_opt/*
+**/*_opt/*
+**/*.opt.*
 html-muncher/dist/**/*
 mangled.zip

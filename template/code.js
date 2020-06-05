@@ -4,9 +4,9 @@ if (typeof DRAPES_TEMPLATE_ROOT === 'undefined') {
   DRAPES_TEMPLATE_ROOT = 'https://resources.library.nd.edu/frame'
 }
 
-var headerTemplate = DRAPES_TEMPLATE_ROOT + '/header.html'
-var footerTemplate = DRAPES_TEMPLATE_ROOT + '/footer.html'
-var headTemplate = DRAPES_TEMPLATE_ROOT + '/head.html'
+var headerTemplate = DRAPES_TEMPLATE_ROOT + '/html/header.html'
+var footerTemplate = DRAPES_TEMPLATE_ROOT + '/html/footer.html'
+var headTemplate = DRAPES_TEMPLATE_ROOT + '/html/head.html'
 var contentfulDirectApi = (typeof DEV_ENV !== 'undefined' && DEV_ENV === true)
   ? 'https://ryz12uieaj.execute-api.us-east-1.amazonaws.com/dev'
   : 'https://406bc7ziyc.execute-api.us-east-1.amazonaws.com/prod'
