@@ -7,7 +7,9 @@ if (typeof DRAPES_TEMPLATE_ROOT === 'undefined') {
 var headerTemplate = DRAPES_TEMPLATE_ROOT + '/header.html'
 var footerTemplate = DRAPES_TEMPLATE_ROOT + '/footer.html'
 var headTemplate = DRAPES_TEMPLATE_ROOT + '/head.html'
-var contentfulDirectApi = 'https://406bc7ziyc.execute-api.us-east-1.amazonaws.com/prod'
+var contentfulDirectApi = (typeof DEV_ENV !== 'undefined' && DEV_ENV === true)
+  ? 'https://ryz12uieaj.execute-api.us-east-1.amazonaws.com/dev'
+  : 'https://406bc7ziyc.execute-api.us-east-1.amazonaws.com/prod'
 
 function documentReady (links, titles, site) {
 
@@ -44,16 +46,18 @@ function displayAlerts(alertsData) {
     alert.class = alert.fields.type.toLowerCase().replace(/\s+[^a-zA-z]*\s*/g, '-')
   })
   var alertSort = (left, right) => {
-    // Sort type as alphanumeric descending, so "Warning" comes before "Informational"
-    if (left.fields.type < right.fields.type) {
-      return 1
-    } else if (left.fields.type > right.fields.type) {
-      return -1
+    // Put "Warning" type at top, otherwise sort alphanumeric asc
+    if (left.fields.type !== right.fields.type) {
+      if (left.fields.type === 'Warning' || right.fields.type === 'Warning') {
+        return left.fields.type === 'Warning' ? -1 : 1
+      } else {
+        return left.fields.type < right.fields.type ? -1 : 1
+      }
     } else {
       // If type is the same, sort by start time
       return left.fields.startTime < right.fields.startTime
-        ? 1
-        : (left.fields.startTime > right.fields.startTime ? -1 : 0)
+        ? -1
+        : (left.fields.startTime > right.fields.startTime ? 1 : 0)
     }
   }
   alertsData.sort(alertSort)

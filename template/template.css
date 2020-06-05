@@ -1185,6 +1185,7 @@ label[for='sp'] {
 }
 
 .alerts {
+  color: #333333;
   width: 100%;
 }
 
@@ -1195,6 +1196,7 @@ label[for='sp'] {
 
 .alert-section {
   border: solid 2px #AA272F;
+  padding: 10px 20px;
 }
 
 .alert-section.informational {
