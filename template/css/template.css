@@ -1,4 +1,4 @@
-@charset "UTF-8";
+../@charset "UTF-8";
 
 .design-notes {
   font-size: 10px;
@@ -9,7 +9,7 @@
 * { Box-sizing: Border-box }
 
 body {
-  background: url("images/background.png");
+  background: url("../images/background.png");
   min-height: 100%;
   font-family: sans-serif;
   image-rendering: -webkit-optimize-contrast;
@@ -421,7 +421,7 @@ body.gold-blue #header h4 a {
 
 #banner {
   clear: both;
-  background: #082142 url('images/fade.png') top repeat-x;
+  background: #082142 url('../images/fade.png') top repeat-x;
 }
 #banner .container-fluid {
   background-position: top right;
@@ -508,7 +508,7 @@ body.gold-blue #header h4 a {
 
 .hours {
   float: none;
-  background: url("/images/hours.png") no-repeat right 5px top 9px;
+  background: url("../images/hours.png") no-repeat right 5px top 9px;
   padding-right:  35px;
 }
 
@@ -537,7 +537,7 @@ body.gold-blue #header h4 a {
   height: 0;
   padding-top: 37px;
   overflow: hidden;
-  background: url('/images/logout.png');
+  background: url('../images/logout.png');
 }
 
 
@@ -822,13 +822,13 @@ button a {
 }
 
 .hours {
-  background: url('images/hours.png') no-repeat right 5px top 9px;
+  background: url('../images/hours.png') no-repeat right 5px top 9px;
 }
 
 
 
 .uNavigation {
-  background: #fff url('images/glass.gif') ;
+  background: #fff url('../images/glass.gif') ;
 }
 
 
@@ -863,7 +863,7 @@ nav div > a, .menu div > a, .menu-list li a {
 }
 
 #banner .container-fluid {
-  background-image: url('images/jesus.2.png');
+  background-image: url('../images/jesus.2.png');
   background-size: contain;
   background-position: right 200px top;
 }
@@ -873,7 +873,7 @@ nav div > a, .menu div > a, .menu-list li a {
 }
 
 .hours-m a, .hours-m:hover a {
-  background: url('images/hours.b.png') no-repeat right 22px top 15px;
+  background: url('../images/hours.b.png') no-repeat right 22px top 15px;
   padding-right: 44px;
 }
 
@@ -1185,6 +1185,8 @@ label[for='sp'] {
 }
 
 .alerts {
+  color: #333333;
+  font-size: 16px;
   width: 100%;
 }
 
@@ -1195,6 +1197,7 @@ label[for='sp'] {
 
 .alert-section {
   border: solid 2px #AA272F;
+  padding: 10px 20px;
 }
 
 .alert-section.informational {
@@ -1210,14 +1213,14 @@ label[for='sp'] {
 }
 
 .alert-section .alert-container {
-  background-image: url('./images/alert-info.svg');
+  background-image: url('../images/alert-info.svg');
   background-repeat: no-repeat;
   background-size: 1.5em;
   background-position: left center;
 }
 
 .alert-section.warning .alert-container {
-  background-image: url('./images/alert-warning.svg');
+  background-image: url('../images/alert-warning.svg');
 }
 
 .alert-container {
