@@ -1191,8 +1191,9 @@ label[for='sp'] {
 }
 
 .alerts a,
-.alert-description a {
+.alerts .alert-section .alert-description a { /* high specificity so it is unlikely to be overridden */
   color: #0b1f40;
+  text-decoration: underline;
 }
 
 .alert-section {

@@ -96,46 +96,54 @@ function addHeader (headerTemplate, links, titles, site) {
   var ADDITIONAL_TITLES_VARIABLE = '{{{ADDITIONAL_TITLES}}}'
   var ALERTS_VARIABLE = '{{{ALERTS}}}'
 
-  return getAlerts(site).then((alertsData) => {
-    // Get the replacement template with an xhr request
-    var xhr= new XMLHttpRequest()
-    xhr.open('GET', headerTemplate, true);
-    xhr.onreadystatechange= function() {
-      // Return if not ready or not good status
-      if (this.readyState !==4 ) return
-      if (this.status !==200 ) return
+  // Get the replacement template with an xhr request
+  var xhr= new XMLHttpRequest()
+  xhr.open('GET', headerTemplate, true);
+  xhr.onreadystatechange= function() {
+    // Return if not ready or not good status
+    if (this.readyState !==4 ) return
+    if (this.status !==200 ) return
 
-      try {
-        let newContent = this.responseText
+    try {
+      let newContent = this.responseText
 
-        // Check if there are any additional links to include and insert them
-        let additionalLinks = []
-        if(links) {
-           additionalLinks = links.map(function(link) {
-            return displayLink(link)
-          })
-        }
-        newContent = newContent.replace(ADDITIONAL_LINKS_VARIABLE, additionalLinks.join(''))
-
-        // Check if there are any additional titles to include and insert them
-        let additionalTitles = []
-        if(titles) {
-           additionalTitles = titles.map(function(title) {
-            return displayTitle(title)
-          })
-        }
-        newContent = newContent.replace(ADDITIONAL_TITLES_VARIABLE, additionalTitles.join(''))
-
-        newContent = newContent.replace(ALERTS_VARIABLE, displayAlerts(alertsData))
-
-        newContent = newContent.replace(/\{\{\{DRAPES_TEMPLATE_ROOT\}\}\}/g, DRAPES_TEMPLATE_ROOT)
-        document.body.insertAdjacentHTML('afterbegin', newContent)
-      } catch (e) {
-        console.log(e)
+      // Check if there are any additional links to include and insert them
+      let additionalLinks = []
+      if(links) {
+         additionalLinks = links.map(function(link) {
+          return displayLink(link)
+        })
       }
+
+      // Check if there are any additional titles to include and insert them
+      let additionalTitles = []
+      if(titles) {
+         additionalTitles = titles.map(function(title) {
+          return displayTitle(title)
+        })
+      }
+
+      newContent = newContent.replace(ADDITIONAL_LINKS_VARIABLE, additionalLinks.join(''))
+      newContent = newContent.replace(ADDITIONAL_TITLES_VARIABLE, additionalTitles.join(''))
+      newContent = newContent.replace(/\{\{\{DRAPES_TEMPLATE_ROOT\}\}\}/g, DRAPES_TEMPLATE_ROOT)
+
+      // We need to wait for alerts to fetch, but don't want to hold up rendering the header.
+      // Fill in the alert variable with something so we can populate it when we get a response.
+      const alertsDivId = 'drapes-contentful-alerts'
+      newContent = newContent.replace(ALERTS_VARIABLE, `<div id='${alertsDivId}' />`)
+
+      // Render the header template as it is without the alerts
+      document.body.insertAdjacentHTML('afterbegin', newContent)
+
+      // Now fetch alerts from contentful, if applicable
+      getAlerts(site).then((alertsData) => {
+        document.getElementById(alertsDivId).insertAdjacentHTML('afterbegin', displayAlerts(alertsData))
+      })
+    } catch (e) {
+      console.log(e)
     }
-    xhr.send()
-  })
+  }
+  xhr.send()
 }
 
 // add the template footer to the page
