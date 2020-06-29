@@ -1196,6 +1196,13 @@ label[for='sp'] {
   text-decoration: underline;
 }
 
+.alerts p {
+  flex: 1 1 auto;
+  line-height: normal;
+  margin: 0;
+  overflow: hidden;
+}
+
 .alert-section {
   border: solid 2px #AA272F;
   padding: 10px 20px;

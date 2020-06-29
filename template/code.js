@@ -16,6 +16,11 @@ function documentReady (links, titles, site) {
   var wrappedClass = 'hesburgh-wrapped'
   // Check to see if the body has not been wrapped yet. If it has, do nothing.
   if(!document.body.classList.contains(wrappedClass)) {
+    // Include Marked.js reference in header so we can parse markdown in alerts
+    var script = document.createElement("script")
+    script.src = "https://cdn.jsdelivr.net/npm/marked/marked.min.js"
+    document.head.appendChild(script)
+
     addHeader(headerTemplate, links, titles, site)
     addFooter(footerTemplate)
     updateHead(headTemplate)
@@ -36,11 +41,8 @@ function displayTitle(title) {
 
 function displayAlerts(alertsData) {
   alertsData.forEach((alert) => {
-    // Matches markdown link pattern: [display text](link)
-    // Display text is first capture group and link url is second capture group.
-    const regex = /\[(.*?)\]\((.*?)\)/gm
-    const html = alert.fields.description.replace(regex, '<a href="$2" target="_blank">$1</a>')
-    alert.html = html
+    // Parse markdown and use that
+    alert.html = marked(alert.fields.description)
 
     // Create class name based on alert type (Ex: "Informational – Yellow" -> "informational-yellow")
     alert.class = alert.fields.type.toLowerCase().replace(/\s+[^a-zA-z]*\s*/g, '-')
