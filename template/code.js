@@ -8,7 +8,7 @@ var headerTemplate = DRAPES_TEMPLATE_ROOT + '/html/header.html'
 var footerTemplate = DRAPES_TEMPLATE_ROOT + '/html/footer.html'
 var headTemplate = DRAPES_TEMPLATE_ROOT + '/html/head.html'
 var contentfulDirectApi = (typeof DEV_ENV !== 'undefined' && DEV_ENV === true)
-  ? 'https://ryz12uieaj.execute-api.us-east-1.amazonaws.com/dev'
+  ? 'https://dqvm2x3c8b.execute-api.us-east-1.amazonaws.com/dev'
   : 'https://406bc7ziyc.execute-api.us-east-1.amazonaws.com/prod'
 
 function documentReady (links, titles, site) {
