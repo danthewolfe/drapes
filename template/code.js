@@ -199,7 +199,7 @@ function getAlerts (site) {
 
     var now = new Date().toISOString()
     var queryString = 'content_type=alert'
-    queryString += '&fields.domain[in]=all,' + site
+    queryString += '&fields.domains[in]=' + site
     queryString += '&fields.startTime[lte]=' + now
     queryString += '&fields.endTime[gte]=' + now
     var url = `${contentfulDirectApi}/livequery?query=${encodeURIComponent(queryString)}`
